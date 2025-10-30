@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 1.2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #764ba2;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Hero Section */
+        #home {
+            text-align: center;
+        }
+
+        .profile-img-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #667eea;
+            object-fit: cover;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+            position: relative;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Education Section */
+        .education-timeline {
+            margin-top: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 0.5rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .education-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .institution {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-item .year {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item p {
+            color: #666;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+        }
+
+        /* Projects Section - VERTICAL */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+            background: linear-gradient(to bottom, #f8f9fa 0%, white 100%);
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-10px);
+        }
+
+        .project-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-card .tech-stack {
+            font-size: 0.9rem;
+            color: white;
+            background: #764ba2;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: #764ba2;
+        }
+
+        /* Experience Section */
+        .experience-list {
+            margin-top: 2rem;
+        }
+
+        .experience-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            background: #e9ecef;
+            transform: translateX(10px);
+        }
+
+        .experience-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .company {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-item .duration {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item ul {
+            margin-left: 1.5rem;
+            color: #666;
+        }
+
+        .experience-item ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Certifications - VERTICAL */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cert-item {
+            background: linear-gradient(to right, #f8f9fa 0%, white 100%);
+            padding: 1.5rem;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cert-item:hover {
+            background: linear-gradient(to right, #e9ecef 0%, #f8f9fa 100%);
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .cert-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .cert-content h3 {
+            color: #667eea;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Links Section */
+        .links-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .link-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .link-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .link-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .project-card {
+                min-width: 280px;
+                max-width: 280px;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .cert-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#links">Links</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home">
+            <div class="profile-img-container">
+                <img src="profile_photo.JPG" alt="Your Profile" class="profile-img">
+            </div>
+            <div class="hero-text">
+                <h1>HARSHITA</h1>
+                <p>Full Stack Developer | Problem Solver | Tech Enthusiast</p>
+                <p style="font-size: 1rem; color: #888;">📍 Madurai | 📧 a.harshita077@example.com | 📱 +91-6384024416</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5+</h3>
+                    <p>Certifications</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>LeetCode Problems</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Hello! I'm a passionate developer with experience in both frontend and backend technologies. 
+                I love building web applications that solve real-world problems and provide excellent user experiences. 
+                With a strong foundation in computer science and a keen eye for design, I strive to create 
+                clean, efficient, and scalable solutions.
+            </p>
+            <p style="margin-top: 1rem;">
+                Currently, I'm focused on enhancing my skills in modern web technologies and exploring new frameworks. 
+                I believe in continuous learning and staying updated with the latest industry trends. I'm actively 
+                seeking opportunities to contribute to innovative projects and grow as a developer.
+            </p>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-timeline">
+                <div class="education-item">
+                    <h3>Bachelor of Engineerin in Computer Science</h3>
+                    <p class="institution">Velammal College Of Engineering and Technology, Madurai</p>
+                    <p class="year">2022 - 2026</p>
+                    <p>CGPA: 7.87/10 | Relevant Coursework: Data Structures and  Algorithms, Database Management, Web Development</p>
+                </div>
+                <div class="education-item">
+                    <h3>Higher Secondary Education</h3>
+                    <p class="institution">Mahatma Montessori School CBSE , Madurai</p>
+                    <p class="year">2022</p>
+                    <p>Percentage: 80.4% </p>
+                </div>
+                <div class="education-item">
+                    <h3>Secondary Education</h3>
+                    <p class="institution">Mahatma Montessori School CBSE , Madurai</p>
+                    <p class="year">2022</p>
+                    <p>Percentage: 70% </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>HTML5</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>CSS3</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>SQL</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>REST APIs</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section - HORIZONTAL SCROLL -->
+        <section id="projects">
+            <h2>My Projects</h2>
+            <p style="color: #888; margin-bottom: 1rem;"></p>
+            <div class="projects-scroll">
+                <div class="project-card">
+                    <div class="project-number">1</div>
+                    <h3>E-Commerce Website</h3>
+                    <p>A fully functional online shopping platform with user authentication, product catalog, shopping cart, and payment integration. Implemented secure checkout process.</p>
+                    <span class="tech-stack">React, Node.js, MongoDB</span>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">2</div>
+                    <h3>Task Management App</h3>
+                    <p>Collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features. Built with modern UI/UX principles.</p>
+                    <span class="tech-stack">React, Firebase, Tailwind</span>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">3</div>
+                    <h3>Weather Dashboard</h3>
+                    <p>Real-time weather application fetching data from multiple APIs. Features include location-based weather, 7-day forecast, and interactive weather maps.</p>
+                    <span class="tech-stack">JavaScript, API, CSS</span>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">4</div>
+                    <h3>Blog Platform</h3>
+                    <p>Full-stack blogging platform with rich text editor, comment system, user profiles, and SEO optimization. Supports markdown and media uploads.</p>
+                    <span class="tech-stack">Python, Flask, PostgreSQL</span>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">5</div>
+                    <h3>Portfolio Generator</h3>
+                    <p>Dynamic portfolio generator allowing users to create customized portfolios by filling a form. Features multiple themes and export options.</p>
+                    <span class="tech-stack">React, Node.js, Express</span>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-list">
+                <div class="experience-item">
+                    <h3>Full Stack Developer Intern</h3>
+                    <p class="company">Company Name | Location</p>
+                    <p class="duration">June 2023 - August 2023</p>
+                    <ul>
+                        <li>Developed responsive web applications using React and Node.js</li>
+                        <li>Collaborated with cross-functional teams to implement new features</li>
+                        <li>Optimized application performance, reducing load time by 30%</li>
+                        <li>Participated in code reviews and maintained coding standards</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h3>Web Development Freelancer</h3>
+                    <p class="company">Self-Employed</p>
+                    <p class="duration">January 2023 - Present</p>
+                    <ul>
+                        <li>Built custom websites for small businesses and startups</li>
+                        <li>Managed client relationships and delivered projects on time</li>
+                        <li>Implemented SEO best practices and improved client website rankings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section - VERTICAL -->
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-content">
+                        <h3>Full Stack Web Development</h3>
+                        <p>Coursera | Google | 2024</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">📜</div>
+                    <div class="cert-content">
+                        <h3>JavaScript Algorithms and Data Structures</h3>
+                        <p>freeCodeCamp | 2023</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-content">
+                        <h3>React - The Complete Guide</h3>
+                        <p>Udemy | Maximilian Schwarzmüller | 2024</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">⭐</div>
+                    <div class="cert-content">
+                        <h3>Python for Data Science</h3>
+                        <p>IBM | Coursera | 2023</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">💻</div>
+                    <div class="cert-content">
+                        <h3>Git and GitHub Essentials</h3>
+                        <p>LinkedIn Learning | 2023</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Section -->
+        <section id="links">
+            <h2>Connect With Me</h2>
+            <div class="links-container">
+                <a href="https://github.com/Harshita-A07" target="_blank" class="link-card">
+                    <h3>GitHub</h3>
+                    <p>View my repositories</p>
+                </a>
+                <a href="https://leetcode.com/u/Harshita__07/" target="_blank" class="link-card">
+                    <h3>LeetCode</h3>
+                    <p>Check my solutions</p>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="link-card">
+                    <h3>LinkedIn</h3>
+                    <p>Professional profile</p>
+                </a>
+                <a href="mailto:a.harshita077@example.com" class="link-card">
+                    <h3>Email</h3>
+                    <p>Get in touch</p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 HARSHITA Made with 💜 and dedication</p>
+    </footer>
+</body>
+</html>
